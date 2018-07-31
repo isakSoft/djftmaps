@@ -15,15 +15,18 @@ FLOW = flow_from_clientsecrets(
 class GoogleFlow:
     """ Google flow is used generate authorization url, build credentials and service (in this case fusion tables) """
 
+    def __init__(self):
+        self.FLOW = FLOW
+
     def autorization_url(self, request):
-        FLOW.params['state'] = xsrfutil.generate_token(
+        self.FLOW.params['state'] = xsrfutil.generate_token(
             settings.SECRET_KEY,
             request.user
         )
-        return FLOW.step1_get_authorize_url()
+        return self.FLOW.step1_get_authorize_url()
 
     def credentials(self, request):
-        credential = FLOW.step2_exchange(request.REQUEST)
+        credential = self.FLOW.step2_exchange(request.REQUEST)
         storage = DjangoORMStorage(CredentialsModel, 'id', request.user, 'credential')
         storage.put(credential)
         return credential.to_json()
