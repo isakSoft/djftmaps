@@ -29,7 +29,7 @@ class GoogleFlow:
         credential = self.FLOW.step2_exchange(request.REQUEST)
         storage = DjangoORMStorage(CredentialsModel, 'id', request.user, 'credential')
         storage.put(credential)
-        return credential.to_json()
+        return credential
 
     def service(self, request):
         storage = DjangoORMStorage(CredentialsModel, 'id', request.user, 'credential')
