@@ -119,3 +119,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.0/howto/static-files/
 
 STATIC_URL = '/static/'
+
+GOOGLE_OAUTH2_CLIENT_SECRETS_JSON = 'client_secrets.json'
+
+TABLE_ID = '1mhlgXsJfNbkkK2iIYXhNq16KfBUxtjtACLMCTo9Y'
